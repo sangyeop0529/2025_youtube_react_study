@@ -9,7 +9,7 @@ export default class Youtube {
   }
 
   async search(keyword) {
-    return keyword ? this.#searchByKeyword() : this.#mostPopular();
+    return keyword ? this.#searchByKeyword(keyword) : this.#mostPopular();
   }
 
   async #searchByKeyword(keyword) {
@@ -26,14 +26,13 @@ export default class Youtube {
       .then((items) => items.map((item) => ({ ...item, id: item.id.videoId })));
   }
 
-  async #mostPopular(keyword) {
+  async #mostPopular() {
     return this.httpClient
       .get("videos", {
         params: {
           part: "snippet",
           maxResults: 25,
           chart: "mostPopular",
-          q: keyword,
         },
       })
       .then((res) => res.data.items);
