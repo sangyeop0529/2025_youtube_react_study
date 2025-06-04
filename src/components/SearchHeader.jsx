@@ -13,7 +13,7 @@ const SearchHeader = () => {
     nav(`/videos/${text}`);
   };
 
-  useEffect(() => setText(keyword || ""), [keyword]); // 사용자가 URL을 직접 입력하거나, 브라우저의 뒤로/앞으로 가기 버튼을 사용하여 검색 결과 페이지로 이동했을 때, 검색창에 해당 keyword를 자동으로 채워주기 위함
+  useEffect(() => setText(keyword || ""), [keyword]); 
 
   return (
     <header className="w-full flex text-2xl border-b border-zinc-600 mb-4">
