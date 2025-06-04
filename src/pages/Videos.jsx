@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
 import FakeYoutube from "../api/fakeYoutube";
+import Youtube from "../api/youtube";
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -13,7 +14,8 @@ const Videos = () => {
   } = useQuery({
     queryKey: ["videos", keyword], // /videos/{keyword}.json
     queryFn: () => {
-      const youtube = new FakeYoutube();
+      // const youtube = new FakeYoutube();
+      const youtube = new Youtube();
       return youtube.search(keyword); // FakeYoutube 클래스를 사용하여 동영상 검색
     },
   });
