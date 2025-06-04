@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
-import axios from "axios";
+import FakeYoutube from "../api/fakeYoutube";
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -12,10 +12,9 @@ const Videos = () => {
     data: videos, // data를 videos로 변경해서 사용
   } = useQuery({
     queryKey: ["videos", keyword], // /videos/{keyword}.json
-    queryFn: async () => {
-      return axios // axios : 더 많은 기능과 자동화된 응답 처리, 오류 처리 덕분에 더 간편하게 사용
-        .get(`/videos/${keyword ? "search" : "popular"}.json`)
-        .then((res) => res.data.items);
+    queryFn: () => {
+      const youtube = new FakeYoutube();
+      return youtube.search(keyword); // FakeYoutube 클래스를 사용하여 동영상 검색
     },
   });
 
